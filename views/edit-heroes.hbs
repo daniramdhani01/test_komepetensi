@@ -1,0 +1,120 @@
+{{>header}}
+{{>navbar}}
+{{#if message}}
+<div class="alert alert-{{message.type}}" role="alert" id="alert">
+    <div class="container">{{message.message}}</div>
+</div>
+{{/if}}
+
+<div class="container my-5 d-flex justify-content-center">
+
+    <div class="card w-50 bg-secondary">
+        <div class="card-header text-center fs-5 fw-bold">
+            Edit Heroes
+        </div>
+        <div class="card-body align-items-center">
+            <form action="/edit-heroes" method="post" enctype="multipart/form-data">
+                <div class=" row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Name</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" name="name" value="{{heroes.name}}">
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label for="inputName" class="col-form-label">Type</label>
+                    </div>
+                    <div class="col-9">
+                        <select class="form-select" aria-label="Default select example" name="type">
+                            <option value="{{heroes.type_id}}" selected hidden>{{heroes.type_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label for="image" class="form-label">Picture</label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" type="file" id="file" name="image" onchange="handleChange()">
+                        <input type="hidden" value="{{heroes.photos}}" name="oldImage">
+                        <input type="hidden" value="{{heroes.photos}}" id="url-thumbnail">
+                        <input type="hidden" value="{{heroes.id}}" name="id">
+                    </div>
+                    <div class="col-3" id="preview-thumbnail"></div>
+                </div>
+                <div class="row g-3 my-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Agility</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="number" name="agility" class="form-control" placeholder="Range : 0-100 "
+                            value="{{heroes.agility}}">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Power</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="number" name="power" class="form-control" placeholder="Range : 0-100 "
+                            value="{{heroes.power}}">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Stamina</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="number" name="stamina" class="form-control" placeholder="Range : 0-100 "
+                            value="{{heroes.stamina}}">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Unique Skill</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" name="skill" value="{{heroes.unique_skill}}">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Weakness</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" name="weakness" value="{{heroes.weakness}}">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label for="synopsis" class="col-form-label">Description</label>
+                    </div>
+                    <div class="col-9">
+                        <textarea class="form-control" name="description">{{heroes.description}}</textarea>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary col-12 mt-2">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const previewElement = document.getElementById('preview-thumbnail');
+    const urlThumbnail = document.getElementById('url-thumbnail').value;
+
+    previewElement.innerHTML = `<img src="${urlThumbnail}" style="width: 250px; margin-left: 170px;" class="mb-3"/>`;
+
+    function handleChange() {
+        const value = URL.createObjectURL(event.target.files[0]);
+        previewElement.innerHTML = `<img src="${value}" style="width: 250px; margin-left: 170px;" class="mb-3"/>`
+    }
+</script>
+
+{{>footer}}

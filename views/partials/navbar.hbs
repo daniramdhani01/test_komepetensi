@@ -1,0 +1,28 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Naruto Shippuden | </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a id="movies" class="nav-link active" aria-current="page" href="/">{{title}}</a>
+                </li>
+                {{!-- <li class="nav-item">
+                    <a id="schedule" class="nav-link" href="/schedule">Schedule</a>
+                </li> --}}
+            </ul>
+            <form>
+                <ul class="navbar-nav me-1">
+                    {{!-- user login --}}
+                    <li class="nav-item me-1">
+                        <button type="submit" formaction="/add-heroes" class="btn btn-success fw-bolder">Add
+                            Heroes</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="submit" formaction="/type-list" class="btn btn-success fw-bolder">Type
+                            list</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</nav>

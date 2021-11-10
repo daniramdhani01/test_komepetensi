@@ -1,0 +1,48 @@
+{{>header}}
+{{#if message}}
+<div class="alert alert-{{message.type}}" role="alert" id="alert">
+    <div class="container">{{message.message}}</div>
+</div>
+{{/if}}
+{{>navbar}}
+
+<div class="container my-3">
+
+    <form>
+        <button type="submit" class="btn btn-primary mb-2" formaction="/add-type">Add New Type</button>
+    </form>
+    <table id="example" class="table table-hover bg-light w-50">
+        <thead class="">
+            <tr>
+                <th>No</th>
+                <th>Type Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form>
+                {{#each type}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.name}}</td>
+                    <td>
+
+                        <button type="submit" class="btn btn-warning" formaction="/edit-type/{{this.id}}"> Edit
+                        </button>
+                        <button type="submit" class="btn btn-danger" formaction="/delete-type/{{this.id}}"> Delete
+                        </button>
+
+                    </td>
+                </tr>
+                {{/each}}
+            </form>
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+</div>
+{{>footer}}

@@ -1,0 +1,113 @@
+{{>header}}
+{{>navbar}}
+{{#if message}}
+<div class="alert alert-{{message.type}}" role="alert" id="alert">
+    <div class="container">{{message.message}}</div>
+</div>
+{{/if}}
+
+<div class="container my-5 d-flex justify-content-center">
+
+    <div class="card w-50 bg-secondary">
+        <div class="card-header text-center fs-5 fw-bold">
+            Add New Heroes
+        </div>
+        <div class="card-body align-items-center">
+            <form action="/add-heroes" method="post" enctype="multipart/form-data">
+                <div class=" row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Name</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label for="inputName" class="col-form-label">Type</label>
+                    </div>
+                    <div class="col-9">
+                        <select class="form-select" aria-label="Default select example" name="type">
+                            <option value="" disabled selected hidden>Choose Type</option>
+                            {{#each type}}
+                            <option value="{{this.id}}"> {{this.name}} </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label for="image" class="form-label">Picture</label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" type="file" name="image" onchange="handleChange()">
+                        <div class="col-3" id="preview-poster"></div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Agility</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="number" name="agility" class="form-control" placeholder="Range : 0-100 ">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Power</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="number" name="power" class="form-control" placeholder="Range : 0-100 ">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Stamina</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="number" name="stamina" class="form-control" placeholder="Range : 0-100 ">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Unique Skill</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" name="skill">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label class="col-form-label">Weakness</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" name="weakness">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-3">
+                        <label for="synopsis" class="col-form-label">Description</label>
+                    </div>
+                    <div class="col-9">
+                        <textarea class="form-control" name="description"></textarea>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary col-12 mt-2">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleChange() {
+        const previewElement = document.getElementById('preview-poster')
+        const value = URL.createObjectURL(event.target.files[0])
+
+        previewElement.innerHTML = `<img src="${value}" style="width:200px;"/>`
+    }
+</script>
+{{>footer}}
