@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+        * {
+            margin: 0%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            font-family: 'Fira Sans', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+            background: #6DD5FA;
+        }
+
+        .container div {
+            padding: 30px;
+        }
+
+        /*=========left-side========== */
+        .left-side {
+            flex: 300px;
+            border-radius: 0px 0px 60px 0px;
+            background-color: mintcream;
+            box-shadow: 10px 3px 24px -1px rgba(0, 0, 0, 0.25)
+        }
+
+        .left-side .header {
+            font-size: 53px;
+            color: midnightblue;
+        }
+
+        .left-side .label {
+            display: block;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .left-side select {
+            margin-top: 100px;
+        }
+
+        .left-side .input {
+            margin-bottom: 20px;
+            height: 55px;
+            width: 100%;
+            padding: 15px;
+            font-size: 100%;
+            border-radius: 8px;
+        }
+
+        .left-side .btn {
+            height: 55px;
+            width: 32%;
+            border-radius: 8px;
+            font-size: 100%;
+            background: royalblue;
+            color: white;
+        }
+
+        .left-side .input:focus {
+            border: 2px solid #6DD5FA;
+            background: whitesmoke;
+            outline-offset: 0px;
+            outline: none;
+        }
+
+        .left-side .btn:active {
+            background: grey;
+        }
+
+        /*==============right side=============*/
+        .right-side {
+            flex: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-side .card {
+            height: 350px;
+            width: 700px;
+            border-radius: 10px;
+            background-color: whitesmoke;
+            display: block;
+            justify-content: center;
+            padding: 15px;
+            color: midnightblue;
+            box-shadow: 10px 3px 24px -1px rgba(0, 0, 0, 0.25)
+        }
+
+        .right-side .header {
+            text-align: center;
+            font-size: 45px;
+        }
+
+        .right-side #show-number {
+            font-size: 30px;
+        }
+
+        .right-side .card .card-result {
+            height: 83%;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-side">
+            <h1 class="header">Penghitungan diskon</h1>
+            <span class="label">Aplikasi sederhana untuk menghitung diskon voucher belanja</span>
+            <select id="voucher" class="input">
+                <option value="" disabled hidden selected>Pilih Voucher</option>
+                <option value="DumbWaysJos">Dumb Ways Jos</option>
+                <option value="DumbWaysMantap">Dumb Ways Mantap</option>
+            </select>
+            <input type="number" id="number" class="input" placeholder="Masukan Jumlah Belanja" required>
+            <input type="submit" class="btn" onclick="hitung()" value="Hitung">
+        </div>
+
+        <div class="right-side">
+            <div class="card">
+                <h1 class="header" id="result-label">Result</h1>
+                <div class="card-result">
+                    <span id="show-result"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const clearInput = () => { document.getElementById("number").value = "" }
+        const clearResult = () => { document.getElementById("show-result").innerText = "" }
+        const voucher = document.getElementById("voucher")
+        const number = document.getElementById("number")
+        let diskon = 0
+        let bayar = 0
+
+        function hitung() {
+            clearResult()
+
+            if (voucher.value === 'DumbWaysJos') {
+                if (number.value < 50000) {
+                    alert('Mohon Maff Voucher DumbWaysJos hanya untuk uang belanja minimal 50.000. transaksi akan dilanjutkan tanpa voucher')
+
+                    bayar = number.value - diskon
+
+                    document.getElementById('show-result').innerHTML = `Jumlah Belanja = ${number.value}<br>Diskon = ${diskon}<br>Bayar = ${bayar}`
+                }
+                else {
+                    diskon = 0.211 * number.value
+                    if (diskon > 20000) {
+                        diskon = 20000
+                    }
+                    bayar = number.value - diskon
+
+                    document.getElementById('show-result').innerHTML = `Jumlah Belanja = ${number.value}<br>Diskon = ${diskon}<br>Bayar = ${bayar}`
+                }
+
+            }
+
+
+            else if (voucher.value === 'DumbWaysMantap') {
+                if (number.value < 80000) {
+                    alert('Mohon Maff Voucher DumbWaysMantap hanya untuk uang belanja minimal 80.000. transaksi akan dilanjutkan tanpa voucher')
+
+                    bayar = number.value - diskon
+
+                    document.getElementById('show-result').innerHTML = `Jumlah Belanja = ${number.value}<br>Diskon = ${diskon}<br>Bayar = ${bayar}`
+                }
+                else {
+                    diskon = 0.3 * number.value
+                    if (diskon > 40000) {
+                        diskon = 40000
+                    }
+                    bayar = number.value - diskon
+
+                    document.getElementById('show-result').innerHTML = `Jumlah Belanja = ${number.value}<br>Diskon = ${diskon}<br>Bayar = ${bayar}`
+                }
+
+            }
+
+            else {
+                bayar = number.value - diskon
+                document.getElementById('show-result').innerHTML = `Jumlah Belanja = ${number.value}<br>Diskon = ${diskon}<br>Bayar = ${bayar}`
+            }
+
+            clearInput()
+        }
+    </script>
+
+</body>
+
+</html>

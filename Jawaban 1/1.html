@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+        * {
+            margin: 0%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            font-family: 'Fira Sans', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+            background: #6DD5FA;
+        }
+
+        .container div {
+            padding: 30px;
+        }
+
+        /*=========left-side========== */
+        .left-side {
+            flex: 300px;
+            border-radius: 0px 0px 60px 0px;
+            background-color: mintcream;
+            box-shadow: 10px 3px 24px -1px rgba(0, 0, 0, 0.25)
+        }
+
+        .left-side .header {
+            font-size: 53px;
+            color: midnightblue;
+        }
+
+        .left-side .label {
+            display: block;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .left-side #number {
+            margin-top: 100px;
+            margin-bottom: 20px;
+            height: 55px;
+            width: 100%;
+            padding: 20px;
+            font-size: 100%;
+            border-radius: 8px;
+        }
+
+        .left-side .btn {
+            height: 55px;
+            width: 32%;
+            border-radius: 8px;
+            font-size: 100%;
+            background: royalblue;
+            color: white;
+        }
+
+        .left-side #number:focus {
+            border: 2px solid #6DD5FA;
+            background: whitesmoke;
+            outline-offset: 0px;
+            outline: none;
+        }
+
+        .left-side .btn:active {
+            background: grey;
+        }
+
+        /*==============right side=============*/
+        .right-side {
+            flex: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-side .card {
+            height: 350px;
+            width: 700px;
+            border-radius: 10px;
+            background-color: whitesmoke;
+            display: block;
+            justify-content: center;
+            padding: 15px;
+            color: midnightblue;
+            box-shadow: 10px 3px 24px -1px rgba(0, 0, 0, 0.25)
+        }
+
+        .right-side .header {
+            text-align: center;
+            font-size: 45px;
+        }
+
+        .right-side #show-number {
+            font-size: 30px;
+        }
+
+        .right-side .card .card-result {
+            height: 83%;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-side">
+            <h1 class="header">Series of Odd, Even and Prime</h1>
+            <span class="label">A simple application to creat a series of odd, even and prime numbers</span>
+            <input type="number" id="number" placeholder="Enter Number Here" required>
+            <input type="submit" class="btn" id="btn-prime" onclick="prime()" value="Prime">
+        </div>
+
+        <div class="right-side">
+            <div class="card">
+                <h1 class="header" id="result-label">Result</h1>
+                <div class="card-result">
+                    <span id="show-number"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const clearInput = () => { document.getElementById("number").value = "" }
+        const clearResult = () => { document.getElementById("show-number").innerText = "" }
+        const number = document.getElementById("number")
+
+        function prime() {
+            clearResult()
+
+            let hasil = '';
+            let notPrime = false;
+
+            for (i = 1; i <= number.value; i++) {
+                for (j = 1; j <= i; j++) {
+                    if (i % j == 0 && i !== j) {
+                        notPrime = true;
+                        hasil = `kosong`
+                    }
+                    if (notPrime === false) {
+                        document.getElementById("show-number").innerHTML += `${i} `
+                        hasil += i + ` `
+                    }
+                }
+                hasil += '\n';
+            }
+
+            console.log(hasil)
+
+            clearInput()
+        }
+    </script>
+
+</body>
+
+</html>
